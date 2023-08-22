@@ -1,0 +1,13 @@
+<view>
+  <view wx:for="{{todos}}">
+    {{index}}: {{item.name}} {{item.detail}}
+    <editor id="abc" class="ql-container" value="{{111}}"></editor>
+  </view>
+  <editor class="ql-container" id="editor" value="{{content}}" placeholder="请输入" bindready="onEditorReady" bindinput="onEditorChange" bindstatuschange="onStatusChange"></editor>
+  <view class="ql-toolbar" catchtouchend="format">
+    <text class="{{formats.header ? 'ql-active' : ''}}" data-name="header" data-value="{{2}}">
+      二级标题
+    </text>
+    <text class="{{formats.bold ? 'ql-active' : ''}}" data-name="bold">加粗</text>
+  </view>
+</view>
