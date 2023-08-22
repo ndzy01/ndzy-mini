@@ -1,15 +1,13 @@
 import request from '../../http';
 
-Page<any, any>({
+Page({
   data: {
-    formats: {},
-    content: '',
     todos: [],
   },
-
-  editorCtx: undefined,
-
   onLoad() {
+    this.getAll();
+  },
+  getAll() {
     request({
       url: '/todos',
       method: 'GET',
@@ -19,30 +17,17 @@ Page<any, any>({
       });
     });
   },
-
-  onEditorReady() {
-    wx.createSelectorQuery()
-      .select('#editor')
-      .context((res) => {
-        this.editorCtx = res.context;
-      })
-      .exec();
+  finishTodo(e: any) {
+    const { id } = e.target.dataset;
+    request({ url: `/todos/${id}`, method: 'PATCH', data: { isDel: true } }).then(() => {
+      this.getAll();
+    });
   },
-
-  format(e: any) {
-    const { name, value } = e.target.dataset;
-    if (!name) return;
-    this.editorCtx.format(name, value);
-  },
-
-  onStatusChange(e: any) {
-    const formats = e.detail;
-    this.setData({ formats });
-  },
-
-  onEditorChange(e: any) {
-    this.setData({
-      content: e.detail.html,
+  delTodo() {},
+  recoverTodo(e: any) {
+    const { id } = e.target.dataset;
+    request({ url: `/todos/${id}`, method: 'PATCH', data: { isDel: false } }).then(() => {
+      this.getAll();
     });
   },
 });

@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "component-editor": "../../components/preview"
+  },
   "navigationBarTitleText": "待办"
 }

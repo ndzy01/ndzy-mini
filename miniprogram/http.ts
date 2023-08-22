@@ -1,11 +1,12 @@
 const request = (options: {
   url: string;
-  method: 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT' | undefined;
+  method: 'OPTIONS' | 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT' | 'PATCH' | undefined;
   data?: any;
 }) => {
   wx.showLoading({ title: '加载中' });
   const token = wx.getStorageSync('token') || '';
-  const baseUrl = 'http://localhost:3000';
+  // const baseUrl = 'http://localhost:3000';
+  const baseUrl = 'https://ndzy-server.vercel.app';
   return new Promise((resolve, reject) => {
     const { data, method } = options;
     if (data && method !== 'GET') {
@@ -13,11 +14,11 @@ const request = (options: {
     }
     wx.request({
       header: { Authorization: 'Basic' + ' ' + token },
-      ...options,
+      ...(options as any),
       url: baseUrl + options.url,
       success: (res: any) => {
-        if (res.data && (res.data.status === 11 || res.data.status === 1)) {
-          if (res.data.status === 1) {
+        if (res.data && (res.data.status === 11 || res.data.status === 0)) {
+          if (res.data.status === 0) {
             wx.showToast({
               title: res.data.msg,
               icon: 'success',

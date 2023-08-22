@@ -1,0 +1,2 @@
+<editor id="preview" bindready="onEditorReady" value="{{innerValue}}"></editor>
+<slot></slot>
