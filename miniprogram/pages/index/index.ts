@@ -23,7 +23,12 @@ Page({
       this.getAll();
     });
   },
-  delTodo() {},
+  delTodo(e: any) {
+    const { id } = e.target.dataset;
+    request({ url: `/todos/${id}`, method: 'DELETE' }).then(() => {
+      this.getAll();
+    });
+  },
   recoverTodo(e: any) {
     const { id } = e.target.dataset;
     request({ url: `/todos/${id}`, method: 'PATCH', data: { isDel: false } }).then(() => {
