@@ -1,7 +1,7 @@
 <scroll-view>
   <view wx:for="{{todos}}">
     <text>{{item.name}}</text>
-    <component-editor value="{{item.detail}}"></component-editor>
+    <component-editor value="{{item.detailHtml}}"></component-editor>
     <button wx:if="{{item.isDel === 0}}" data-id="{{item.id}}" bindtap="finishTodo">完成</button>
     <button wx:if="{{item.isDel === 1}}" data-id="{{item.id}}" bindtap="recoverTodo">恢复</button>
     <!-- <button wx:if="{{item.isDel === 1}}" bindtap="delTodo">删除</button> -->
