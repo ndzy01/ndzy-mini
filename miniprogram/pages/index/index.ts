@@ -61,7 +61,7 @@ Page({
       .catch(() => {
         this.setData({
           isDemo: true,
-          todos: demoData,
+          todos: JSON.parse(JSON.stringify(demoData)),
         });
       });
   },
