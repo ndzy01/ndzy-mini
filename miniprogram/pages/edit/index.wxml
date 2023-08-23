@@ -2,7 +2,7 @@
 <picker mode="date" value="{{deadline}}" start="2023-09-01" end="2017-09-01" bindchange="bindDeadlineChange">
   <view class="picker">当前选择: {{deadline}}</view>
 </picker>
-<component-editor value="{{detailHtml}}" bind:onChange="bindDetailHtmlChange"></component-editor>
+<component-editor wx:if="{{detailHtml}}" value="{{detailHtml}}" bind:onChange="bindDetailHtmlChange"></component-editor>
 <input class="weui-input" value="{{link}}" bindinput="bindLinkChange" placeholder="请输入" />
 <picker mode="selector" range-key="name" bindchange="bindTagChange" range="{{tags}}">
   <view class="picker">当前选择：{{selectTag.name}}</view>
