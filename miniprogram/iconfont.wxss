@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'iconfont'; /* Project id 4221065 */
-  src: url('//at.alicdn.com/t/c/font_4221065_ua4ab93jjfg.woff2?t=1692752222670') format('woff2'),
-    url('//at.alicdn.com/t/c/font_4221065_ua4ab93jjfg.woff?t=1692752222670') format('woff'),
-    url('//at.alicdn.com/t/c/font_4221065_ua4ab93jjfg.ttf?t=1692752222670') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4221065_e0x9137kyqu.woff2?t=1692832393930') format('woff2'),
+    url('//at.alicdn.com/t/c/font_4221065_e0x9137kyqu.woff?t=1692832393930') format('woff'),
+    url('//at.alicdn.com/t/c/font_4221065_e0x9137kyqu.ttf?t=1692832393930') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,30 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-formatheader2:before {
+  content: '\e861';
+}
+
+.icon-formatheader3:before {
+  content: '\e862';
+}
+
+.icon-checklist:before {
+  content: '\e60b';
+}
+
+.icon-wuxupailie:before {
+  content: '\e63e';
+}
+
+.icon-youxupailie:before {
+  content: '\e64c';
+}
+
+.icon-zitixiahuaxian:before {
+  content: '\e658';
 }
 
 .icon-zitixieti:before {

@@ -1,0 +1,17 @@
+.form-item {
+  display: flex;
+}
+.form-item-label {
+  display: flex;
+  align-items: center;
+  max-width: 6.2em;
+  min-width: 6.2em;
+  margin-right: 12px;
+}
+.form-item-value {
+  flex: 1;
+  color: var(--cell-value-color, #969799);
+  overflow: hidden;
+  text-align: left;
+  vertical-align: middle;
+}

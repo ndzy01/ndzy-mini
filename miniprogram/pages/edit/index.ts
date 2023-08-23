@@ -8,8 +8,10 @@ Page<
     name: string;
     deadline: string;
     tags: any[];
-    selectTag: any;
+    tagIndex: number;
+    tag?: { id: string; name: string };
     editType: string;
+    show: boolean;
   },
   { [k: string]: any }
 >({
@@ -20,10 +22,18 @@ Page<
     name: '',
     deadline: '',
     tags: [],
-    selectTag: {},
+    tagIndex: 0,
     editType: '',
+    show: false,
+  },
+  onPullDownRefresh() {
+    this.onLoad();
   },
   onLoad(query) {
+    wx.stopPullDownRefresh();
+    this.init(query);
+  },
+  init(query: any) {
     if (query.id) {
       request({ url: `/todos/${query.id}`, method: 'GET' }).then((res: any) => {
         if (res.data && res.data.length > 0) {
@@ -39,7 +49,8 @@ Page<
           request({ url: '/tags', method: 'GET' }).then((tagRes: any) => {
             this.setData({
               tags: tagRes.data,
-              selectTag: tagRes.data.find((item: any) => item.id === todo.tagId),
+              tagIndex: tagRes.data.findIndex((item: any) => item.id === todo.tagId),
+              tag: tagRes.data.find((item: any) => item.id === todo.tagId),
             });
           });
         }
@@ -64,18 +75,26 @@ Page<
     this.setData({ deadline: value });
   },
   bindTagChange(e: any) {
-    const { value } = e.detail;
-    this.setData({ selectTag: this.data.tags[value] });
+    const { index, value } = e.detail;
+    this.setData({ tagIndex: index, tag: value });
   },
   bindDetailHtmlChange(e: any) {
     const { html } = e.detail;
     this.setData({ detailHtml: html });
   },
   bindSave() {
+    if (!this.data?.tag?.id || !this.data.detailHtml || !this.data.name || !this.data.deadline) {
+      wx.showToast({
+        title: '名称 截止时间 详情 标签 不能为空',
+        icon: 'error',
+        duration: 2000,
+      });
+      return;
+    }
     const baseParams: any = {
       detailHtml: this.data.detailHtml,
       link: this.data.link,
-      tagId: this.data.selectTag.id,
+      tagId: this.data.tag.id,
       name: this.data.name,
       deadline: this.data.deadline,
       detail: this.data.detailHtml,
@@ -93,5 +112,11 @@ Page<
         });
       });
     }
+  },
+  showPopup() {
+    this.setData({ show: true });
+  },
+  onClose() {
+    this.setData({ show: false });
   },
 });

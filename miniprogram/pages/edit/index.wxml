@@ -1,21 +1,35 @@
 <van-cell-group>
   <van-field label="名称" required clearable value="{{ name }}" placeholder="请输入" border="{{ false }}" bind:change="bindNameChange" />
-  <view class="form-item">
-    <text>截止时间：</text>
-    <picker mode="date" value="{{deadline}}" start="2023-09-01" end="2017-09-01" bindchange="bindDeadlineChange">
-      <view class="picker">当前选择: {{deadline}}</view>
-    </picker>
-  </view>
-  <view class="form-item">
-    <text>详情：</text>
-    <component-editor wx:if="{{editType === 'add' || detailHtml}}" value="{{detailHtml}}" bind:onChange="bindDetailHtmlChange"></component-editor>
-  </view>
+  <van-cell>
+    <view class="form-item">
+      <view class="form-item-label">
+        <label>截止时间</label>
+      </view>
+      <view class="form-item-value">
+        <picker mode="date" value="{{deadline}}" start="2023-09-01" end="2017-09-01" bindchange="bindDeadlineChange">
+          <view class="picker">当前选择: {{deadline}}</view>
+        </picker>
+      </view>
+    </view>
+  </van-cell>
+  <van-cell>
+    <view class="form-item">
+      <view class="form-item-value">
+        <component-editor wx:if="{{editType === 'add' || detailHtml}}" value="{{detailHtml}}" bind:onChange="bindDetailHtmlChange"></component-editor>
+      </view>
+    </view>
+  </van-cell>
   <van-field label="链接" clearable value="{{ link }}" placeholder="请输入" border="{{ false }}" bind:change="bindLinkChange" />
-  <view class="form-item">
-    <text>标签：</text>
-    <picker mode="selector" range-key="name" bindchange="bindTagChange" range="{{tags}}">
-      <view class="picker">当前选择：{{selectTag.name}}</view>
-    </picker>
-  </view>
+  <van-cell>
+    <view class="form-item">
+      <view class="form-item-label">
+        <label>标签</label>
+      </view>
+      <view class="form-item-value" bindtap="showPopup">当前选择: {{tag.name}}</view>
+    </view>
+  </van-cell>
   <van-button type="primary" bindtap="bindSave">保存</van-button>
 </van-cell-group>
+<van-popup show="{{ show }}" position="bottom" custom-style="height: 50%" bind:close="onClose">
+  <van-picker default-index="{{tagIndex}}" value-key="name" columns="{{ tags }}" bind:change="bindTagChange" />
+</van-popup>
