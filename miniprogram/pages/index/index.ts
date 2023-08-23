@@ -35,7 +35,16 @@ const demoData = [
   },
 ];
 
-Page({
+Page<
+  { todos: { id: string; isDel: number }[]; isDemo: boolean },
+  {
+    goEditPage: (e: any) => void;
+    getAll: () => void;
+    finishTodo: (e: any) => void;
+    delTodo: (e: any) => void;
+    recoverTodo: (e: any) => void;
+  }
+>({
   data: {
     todos: [],
     isDemo: false,
@@ -46,6 +55,18 @@ Page({
   onLoad() {
     wx.stopPullDownRefresh();
     this.getAll();
+  },
+  goEditPage(e) {
+    const { id } = e.target.dataset;
+    if (id) {
+      wx.navigateTo({
+        url: `/pages/edit/index?id=${id}`,
+      });
+    } else {
+      wx.navigateTo({
+        url: '/pages/edit/index',
+      });
+    }
   },
   getAll() {
     request({
@@ -65,7 +86,7 @@ Page({
         });
       });
   },
-  finishTodo(e: any) {
+  finishTodo(e) {
     const { id } = e.target.dataset;
     if (this.data.isDemo) {
       this.setData({
@@ -83,7 +104,7 @@ Page({
       });
     }
   },
-  delTodo(e: any) {
+  delTodo(e) {
     const { id } = e.target.dataset;
     if (this.data.isDemo) {
       this.setData({
@@ -96,7 +117,7 @@ Page({
       });
     }
   },
-  recoverTodo(e: any) {
+  recoverTodo(e) {
     const { id } = e.target.dataset;
     if (this.data.isDemo) {
       this.setData({

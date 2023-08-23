@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "component-editor": "../../components/ndzy-editor"
+  },
+  "navigationBarTitleText": "编辑"
+}

@@ -1,20 +1,20 @@
 @import '../../iconfont.wxss';
 
 .ql-container {
-  padding: 12rpx;
-  border: 1rpx solid #707070;
+  padding: 12px;
+  border: 1px solid #707070;
 }
 
 .toolbar {
   z-index: 999;
   box-sizing: border-box;
-  padding: 0 20rpx;
-  height: 100rpx;
+  padding: 0 20px;
+  height: 100px;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 2rpx solid #ececec;
+  border: 2px solid #ececec;
   border-left: none;
   border-right: none;
   background-color: #ffffff;

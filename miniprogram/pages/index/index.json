@@ -1,7 +1,6 @@
 {
   "usingComponents": {
-    "component-preview": "../../components/preview",
-    "component-editor": "../../components/ndzy-editor"
+    "component-preview": "../../components/preview"
   },
   "navigationBarTitleText": "待办",
   "enablePullDownRefresh": true
