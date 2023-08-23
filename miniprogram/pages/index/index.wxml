@@ -1,9 +1,19 @@
 <scroll-view>
-  <view wx:for="{{todos}}">
-    <text>{{item.name}}</text>
+  <view wx:for="{{todos}}" class="todo-item">
+    <view class="around mb-16">
+      <view class="toto-item-title">{{item.name}}</view>
+      <view class="{{item.isDel === 1 ? 'green' : 'red'}}">
+        {{item.isDel === 1 ? '完成' : '处理中'}}
+      </view>
+    </view>
     <component-editor value="{{item.detailHtml}}"></component-editor>
-    <button wx:if="{{item.isDel === 0}}" data-id="{{item.id}}" bindtap="finishTodo">完成</button>
-    <button wx:if="{{item.isDel === 1}}" data-id="{{item.id}}" bindtap="recoverTodo">恢复</button>
-    <button wx:if="{{item.isDel === 1}}" data-id="{{item.id}}" bindtap="delTodo">删除</button>
+    <view>创建人：{{item.userName||"--"}}</view>
+    <view>标签：{{item.tagName||"--"}}</view>
+    <view>终止日期：{{item.deadline||"--"}}</view>
+    <view class="around">
+      <button wx:if="{{item.isDel === 0}}" data-id="{{item.id}}" bindtap="finishTodo">完成</button>
+      <button wx:if="{{item.isDel === 1}}" data-id="{{item.id}}" bindtap="recoverTodo">恢复</button>
+      <button wx:if="{{item.isDel === 1}}" data-id="{{item.id}}" bindtap="delTodo">删除</button>
+    </view>
   </view>
 </scroll-view>

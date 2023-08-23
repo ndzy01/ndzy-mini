@@ -38,7 +38,7 @@ const request = (options: {
       },
       fail: function (res) {
         wx.showToast({
-          title: '出错了',
+          title: '网络出错了',
           icon: 'error',
           duration: 2000,
         });
