@@ -1,7 +1,16 @@
 import request from '../../http';
 
 Page<
-  { id: string; detailHtml: string; link: string; name: string; deadline: string; tags: any[]; selectTag: any },
+  {
+    id: string;
+    detailHtml: string;
+    link: string;
+    name: string;
+    deadline: string;
+    tags: any[];
+    selectTag: any;
+    editType: string;
+  },
   { [k: string]: any }
 >({
   data: {
@@ -12,6 +21,7 @@ Page<
     deadline: '',
     tags: [],
     selectTag: {},
+    editType: '',
   },
   onLoad(query) {
     if (query.id) {
@@ -24,6 +34,7 @@ Page<
             link: todo.link,
             name: todo.name,
             deadline: todo.deadline,
+            editType: 'edit',
           });
           request({ url: '/tags', method: 'GET' }).then((tagRes: any) => {
             this.setData({
@@ -37,6 +48,7 @@ Page<
       request({ url: '/tags', method: 'GET' }).then((tagRes: any) => {
         this.setData({
           tags: tagRes.data,
+          editType: 'add',
         });
       });
     }
