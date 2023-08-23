@@ -1,10 +1,25 @@
-<input class="weui-input" value="{{name}}" bindinput="bindNameChange" placeholder="请输入" />
-<picker mode="date" value="{{deadline}}" start="2023-09-01" end="2017-09-01" bindchange="bindDeadlineChange">
-  <view class="picker">当前选择: {{deadline}}</view>
-</picker>
-<component-editor wx:if="{{editType === 'add' || detailHtml}}" value="{{detailHtml}}" bind:onChange="bindDetailHtmlChange"></component-editor>
-<input class="weui-input" value="{{link}}" bindinput="bindLinkChange" placeholder="请输入" />
-<picker mode="selector" range-key="name" bindchange="bindTagChange" range="{{tags}}">
-  <view class="picker">当前选择：{{selectTag.name}}</view>
-</picker>
+<view class="form-item">
+  <text>名称：</text>
+  <input class="weui-input" value="{{name}}" bindinput="bindNameChange" placeholder="请输入" />
+</view>
+<view class="form-item">
+  <text>截止时间：</text>
+  <picker mode="date" value="{{deadline}}" start="2023-09-01" end="2017-09-01" bindchange="bindDeadlineChange">
+    <view class="picker">当前选择: {{deadline}}</view>
+  </picker>
+</view>
+<view class="form-item">
+  <text>详情：</text>
+  <component-editor wx:if="{{editType === 'add' || detailHtml}}" value="{{detailHtml}}" bind:onChange="bindDetailHtmlChange"></component-editor>
+</view>
+<view class="form-item">
+  <text>链接：</text>
+  <input class="weui-input" value="{{link}}" bindinput="bindLinkChange" placeholder="请输入" />
+</view>
+<view class="form-item">
+  <text>标签：</text>
+  <picker mode="selector" range-key="name" bindchange="bindTagChange" range="{{tags}}">
+    <view class="picker">当前选择：{{selectTag.name}}</view>
+  </picker>
+</view>
 <button bindtap="bindSave">保存</button>
