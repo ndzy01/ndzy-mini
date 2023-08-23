@@ -8,6 +8,6 @@
   },
   "style": "v2",
   "networkTimeout": {
-    "request": 5000
+    "request": 10000
   }
 }
