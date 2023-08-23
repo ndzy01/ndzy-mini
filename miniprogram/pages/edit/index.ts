@@ -54,12 +54,10 @@ Page<
     }
   },
   bindNameChange(e: any) {
-    const { value } = e.detail;
-    this.setData({ name: value });
+    this.setData({ name: e.detail });
   },
   bindLinkChange(e: any) {
-    const { value } = e.detail;
-    this.setData({ link: value });
+    this.setData({ link: e.detail });
   },
   bindDeadlineChange(e: any) {
     const { value } = e.detail;

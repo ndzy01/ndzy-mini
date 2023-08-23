@@ -1,5 +1,9 @@
 <scroll-view>
-  <button data-id="" bindtap="goEditPage">新增待办</button>
+  <van-sticky offset-top="{{ 8 }}">
+    <van-button wx:if="{{!isLocal}}" type="primary" data-id="" bindtap="goEditPage">
+      新增待办
+    </van-button>
+  </van-sticky>
   <view wx:for="{{todos}}" class="todo-item">
     <view class="around mb-16">
       <view class="toto-item-title">{{item.name}}</view>
@@ -8,14 +12,22 @@
       </view>
     </view>
     <component-preview value="{{item.detailHtml}}"></component-preview>
-    <view>创建人：{{item.userName||"--"}}</view>
-    <view>标签：{{item.tagName||"--"}}</view>
-    <view>终止日期：{{item.deadline||"--"}}</view>
+    <van-tag type="primary">创建人：{{item.userName||"--"}}</van-tag>
+    <van-tag type="success">标签：{{item.tagName||"--"}}</van-tag>
+    <van-tag type="danger">终止日期：{{item.deadline||"--"}}</van-tag>
     <view class="around">
-      <button wx:if="{{item.isDel === 0}}" data-id="{{item.id}}" bindtap="goEditPage">编辑</button>
-      <button wx:if="{{item.isDel === 0}}" data-id="{{item.id}}" bindtap="finishTodo">完成</button>
-      <button wx:if="{{item.isDel === 1}}" data-id="{{item.id}}" bindtap="recoverTodo">恢复</button>
-      <button wx:if="{{item.isDel === 1}}" data-id="{{item.id}}" bindtap="delTodo">删除</button>
+      <van-button wx:if="{{item.isDel === 0 && !isLocal }}" data-id="{{item.id}}" bindtap="goEditPage">
+        编辑
+      </van-button>
+      <van-button wx:if="{{item.isDel === 0}}" data-id="{{item.id}}" bindtap="finishTodo">
+        完成
+      </van-button>
+      <van-button wx:if="{{item.isDel === 1}}" data-id="{{item.id}}" bindtap="recoverTodo">
+        恢复
+      </van-button>
+      <van-button wx:if="{{item.isDel === 1}}" data-id="{{item.id}}" bindtap="delTodo">
+        删除
+      </van-button>
     </view>
   </view>
 </scroll-view>

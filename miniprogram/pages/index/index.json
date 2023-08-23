@@ -1,6 +1,9 @@
 {
   "usingComponents": {
-    "component-preview": "../../components/preview"
+    "component-preview": "../../components/preview",
+    "van-button": "@vant/weapp/button/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-tag": "@vant/weapp/tag/index"
   },
   "navigationBarTitleText": "待办",
   "enablePullDownRefresh": true

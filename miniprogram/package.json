@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@vant/weapp": "^1.10.23"
+  },
+  "devDependencies": {
+    "miniprogram-api-typings": "^3.11.0"
+  }
+}
