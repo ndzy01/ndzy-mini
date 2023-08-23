@@ -19,8 +19,8 @@ const demoData = [
   },
   {
     createdAt: '2023-08-22T19:17:52.858Z',
-    detail: '## 十点前上床睡觉\n\nabc\n\ndef\n',
-    detailHtml: '<h2>十点前上床睡觉</h2>\n<p>abc</p>\n<p>def</p>\n',
+    detail: '## 十点前上床睡觉',
+    detailHtml: '<h2>十点前上床睡觉</h2>',
     id: '6df6b214-53ef-4635-9aa4-a788ae52feaa',
     isDel: 1,
     link: '',
