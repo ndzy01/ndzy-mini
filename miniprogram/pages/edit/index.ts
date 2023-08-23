@@ -9,7 +9,7 @@ Page<
     deadline: string;
     tags: any[];
     tagIndex: number;
-    tag?: { id: string; name: string };
+    tag: { id: string; name: string };
     editType: string;
     show: boolean;
   },
@@ -25,6 +25,7 @@ Page<
     tagIndex: 0,
     editType: '',
     show: false,
+    tag: { id: '', name: '' },
   },
   onPullDownRefresh() {
     this.onLoad();
@@ -83,10 +84,34 @@ Page<
     this.setData({ detailHtml: html });
   },
   bindSave() {
-    if (!this.data?.tag?.id || !this.data.detailHtml || !this.data.name || !this.data.deadline) {
+    if (!this.data.name) {
       wx.showToast({
-        title: '名称 截止时间 详情 标签 不能为空',
-        icon: 'error',
+        title: '名称 不能为空！',
+        icon: 'none',
+        duration: 2000,
+      });
+      return;
+    }
+    if (!this.data.deadline) {
+      wx.showToast({
+        title: '截止时间 不能为空！',
+        icon: 'none',
+        duration: 2000,
+      });
+      return;
+    }
+    if (!this.data.detailHtml) {
+      wx.showToast({
+        title: '详情 不能为空！',
+        icon: 'none',
+        duration: 2000,
+      });
+      return;
+    }
+    if (!this.data.tag.id) {
+      wx.showToast({
+        title: '标签 不能为空！',
+        icon: 'none',
         duration: 2000,
       });
       return;
