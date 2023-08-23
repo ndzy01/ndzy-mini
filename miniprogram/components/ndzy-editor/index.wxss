@@ -1,0 +1,25 @@
+@import '../../iconfont.wxss';
+
+.ql-container {
+  padding: 12rpx;
+  border: 1rpx solid #707070;
+}
+
+.toolbar {
+  z-index: 999;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  height: 100rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2rpx solid #ececec;
+  border-left: none;
+  border-right: none;
+  background-color: #ffffff;
+}
+
+.ql-active {
+  color: #22c704;
+}

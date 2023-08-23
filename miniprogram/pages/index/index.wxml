@@ -1,4 +1,5 @@
 <scroll-view>
+  <component-editor></component-editor>
   <view wx:for="{{todos}}" class="todo-item">
     <view class="around mb-16">
       <view class="toto-item-title">{{item.name}}</view>
@@ -6,7 +7,7 @@
         {{item.isDel === 1 ? '完成' : '处理中'}}
       </view>
     </view>
-    <component-editor value="{{item.detailHtml}}"></component-editor>
+    <component-preview value="{{item.detailHtml}}"></component-preview>
     <view>创建人：{{item.userName||"--"}}</view>
     <view>标签：{{item.tagName||"--"}}</view>
     <view>终止日期：{{item.deadline||"--"}}</view>

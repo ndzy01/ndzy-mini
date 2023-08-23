@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "component-editor": "../../components/preview"
+    "component-preview": "../../components/preview",
+    "component-editor": "../../components/ndzy-editor"
   },
   "navigationBarTitleText": "待办"
 }
