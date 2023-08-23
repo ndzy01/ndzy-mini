@@ -1,5 +1,5 @@
 <scroll-view>
-  <component-editor></component-editor>
+  <!-- <component-editor></component-editor> -->
   <view wx:for="{{todos}}" class="todo-item">
     <view class="around mb-16">
       <view class="toto-item-title">{{item.name}}</view>

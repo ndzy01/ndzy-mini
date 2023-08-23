@@ -3,5 +3,6 @@
     "component-preview": "../../components/preview",
     "component-editor": "../../components/ndzy-editor"
   },
-  "navigationBarTitleText": "待办"
+  "navigationBarTitleText": "待办",
+  "enablePullDownRefresh": true
 }
