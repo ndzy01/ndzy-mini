@@ -1,7 +1,7 @@
 import request from '../../http';
 
 Page<
-  { todos: { id: string; isDel: number }[]; isLocal: boolean },
+  { todos: { id: string; isDel: number }[]; isLocal: boolean; showCreate: boolean },
   {
     goEditPage: (e: any) => void;
     getAll: () => void;
@@ -11,6 +11,7 @@ Page<
   }
 >({
   data: {
+    showCreate: false,
     todos: [],
     isLocal: false,
   },
@@ -37,17 +38,21 @@ Page<
     request({
       url: '/todos',
       method: 'GET',
+      // TODO-n
+      data: { operationSource: 'wx' },
     })
       .then((res: any) => {
         this.setData({
           todos: res.data,
           isLocal: false,
+          showCreate: true,
         });
       })
       .catch(() => {
         this.setData({
           isLocal: true,
           todos: JSON.parse(wx.getStorageSync('local')),
+          showCreate: false,
         });
       });
   },

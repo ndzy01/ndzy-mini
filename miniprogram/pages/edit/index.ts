@@ -3,7 +3,7 @@ import request from '../../http';
 Page<
   {
     id: string;
-    detailHtml: string;
+    detail: string;
     link: string;
     name: string;
     deadline: string;
@@ -17,7 +17,7 @@ Page<
 >({
   data: {
     id: '',
-    detailHtml: '',
+    detail: '',
     link: '',
     name: '',
     deadline: '',
@@ -41,7 +41,7 @@ Page<
           const todo = res.data[0];
           this.setData({
             id: query.id,
-            detailHtml: todo.detailHtml,
+            detail: todo.detail,
             link: todo.link,
             name: todo.name,
             deadline: todo.deadline,
@@ -58,10 +58,18 @@ Page<
       });
     } else {
       request({ url: '/tags', method: 'GET' }).then((tagRes: any) => {
-        this.setData({
-          tags: tagRes.data,
-          editType: 'add',
-        });
+        if (tagRes.data.length > 0) {
+          this.setData({
+            tag: tagRes.data[0],
+            tags: tagRes.data,
+            editType: 'add',
+          });
+        } else {
+          this.setData({
+            tags: tagRes.data,
+            editType: 'add',
+          });
+        }
       });
     }
   },
@@ -79,9 +87,9 @@ Page<
     const { index, value } = e.detail;
     this.setData({ tagIndex: index, tag: value });
   },
-  bindDetailHtmlChange(e: any) {
+  bindDetailChange(e: any) {
     const { html } = e.detail;
-    this.setData({ detailHtml: html });
+    this.setData({ detail: html });
   },
   bindSave() {
     if (!this.data.name) {
@@ -100,7 +108,7 @@ Page<
       });
       return;
     }
-    if (!this.data.detailHtml) {
+    if (!this.data.detail) {
       wx.showToast({
         title: '详情 不能为空！',
         icon: 'none',
@@ -117,12 +125,11 @@ Page<
       return;
     }
     const baseParams: any = {
-      detailHtml: this.data.detailHtml,
       link: this.data.link,
       tagId: this.data.tag.id,
       name: this.data.name,
       deadline: this.data.deadline,
-      detail: this.data.detailHtml,
+      detail: this.data.detail,
     };
     if (this.data.id) {
       request({ url: `/todos/${this.data.id}`, method: 'PATCH', data: { ...baseParams } }).then(() => {
@@ -131,7 +138,7 @@ Page<
         });
       });
     } else {
-      request({ url: '/todos', method: 'POST', data: { ...baseParams } }).then(() => {
+      request({ url: '/todos', method: 'POST', data: { ...baseParams, operationSource: 'wx' } }).then(() => {
         wx.navigateTo({
           url: '/pages/index/index',
         });

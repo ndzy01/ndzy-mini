@@ -6,7 +6,7 @@
         <label>截止时间</label>
       </view>
       <view class="form-item-value">
-        <picker mode="date" value="{{deadline}}" start="2023-09-01" end="2017-09-01" bindchange="bindDeadlineChange">
+        <picker mode="date" value="{{deadline}}" start="2023-08-21" end="2035-09-01" bindchange="bindDeadlineChange">
           <view class="picker">当前选择: {{deadline}}</view>
         </picker>
       </view>
@@ -15,7 +15,7 @@
   <van-cell>
     <view class="form-item">
       <view class="form-item-value">
-        <component-editor wx:if="{{editType === 'add' || detailHtml}}" value="{{detailHtml}}" bind:onChange="bindDetailHtmlChange"></component-editor>
+        <component-editor wx:if="{{editType === 'add' || detail}}" value="{{detai}}" bind:onChange="bindDetailChange"></component-editor>
       </view>
     </view>
   </van-cell>
@@ -28,7 +28,11 @@
       <view class="form-item-value" bindtap="showPopup">当前选择: {{tag.name}}</view>
     </view>
   </van-cell>
-  <van-button type="primary" bindtap="bindSave">保存</van-button>
+  <van-cell>
+    <view class="center">
+      <van-button type="primary" bindtap="bindSave">保存</van-button>
+    </view>
+  </van-cell>
 </van-cell-group>
 <van-popup show="{{ show }}" position="bottom" custom-style="height: 50%" bind:close="onClose">
   <van-picker default-index="{{tagIndex}}" value-key="name" columns="{{ tags }}" bind:change="bindTagChange" />

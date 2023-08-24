@@ -1,6 +1,6 @@
 <scroll-view>
-  <van-sticky offset-top="{{ 8 }}">
-    <van-button wx:if="{{!isLocal}}" type="primary" data-id="" bindtap="goEditPage">
+  <van-sticky offset-top="{{ 4 }}">
+    <van-button wx:if="{{!isLocal || showCreate}}" type="primary" data-id="" bindtap="goEditPage">
       新增待办
     </van-button>
   </van-sticky>
@@ -11,7 +11,7 @@
         {{item.isDel === 1 ? '完成' : '处理中'}}
       </view>
     </view>
-    <component-preview value="{{item.detailHtml}}"></component-preview>
+    <component-preview value="{{item.detail}}"></component-preview>
     <van-tag type="primary">创建人：{{item.userName||"--"}}</van-tag>
     <van-tag type="success">标签：{{item.tagName||"--"}}</van-tag>
     <van-tag type="danger">终止日期：{{item.deadline||"--"}}</van-tag>
