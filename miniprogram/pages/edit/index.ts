@@ -11,7 +11,8 @@ Page<
     tagIndex: number;
     tag: { id: string; name: string };
     editType: string;
-    show: boolean;
+    showTags: boolean;
+    showCalendar: boolean;
   },
   { [k: string]: any }
 >({
@@ -22,10 +23,11 @@ Page<
     name: '',
     deadline: '',
     tags: [],
+    tag: { id: '', name: '' },
     tagIndex: 0,
     editType: '',
-    show: false,
-    tag: { id: '', name: '' },
+    showTags: false,
+    showCalendar: false,
   },
   onPullDownRefresh() {
     this.onLoad();
@@ -145,10 +147,26 @@ Page<
       });
     }
   },
-  showPopup() {
-    this.setData({ show: true });
+  showTagsPopup() {
+    this.setData({ showTags: true });
   },
-  onClose() {
-    this.setData({ show: false });
+  onTagsClose() {
+    this.setData({ showTags: false });
+  },
+  onCalendarDisplay() {
+    this.setData({ showCalendar: true });
+  },
+  onCalendarClose() {
+    this.setData({ showCalendar: false });
+  },
+  formatDate(date: any) {
+    date = new Date(date);
+    return `${date.getYear() + 1900}/${date.getMonth() + 1}/${date.getDate()}`;
+  },
+  onCalendarConfirm(e: any) {
+    this.setData({
+      showCalendar: false,
+      deadline: this.formatDate(e.detail),
+    });
   },
 });

@@ -5,32 +5,26 @@
   margin: 16px !important;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
 }
-
 .toto-item-title {
   color: rgba(0, 0, 0, 0.88);
   font-weight: 600;
   font-size: 16px;
 }
-
 .green {
   color: green;
 }
-
 .red {
   color: red;
 }
-
 .around {
   display: flex;
   justify-content: space-around;
 }
-
 .center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .mb-16 {
   margin-bottom: 16px;
 }
