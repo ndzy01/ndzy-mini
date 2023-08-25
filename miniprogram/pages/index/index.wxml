@@ -13,7 +13,7 @@
           <van-button wx:if="{{!isLocal || show}}" bindtap="signOut">登出</van-button>
         </view>
       </van-sticky>
-      <view wx:for="{{todos}}" class="todo-item">
+      <view wx:for="{{todos}}" class="todo-item" wx:key="id">
         <view class="around mb-16">
           <view class="toto-item-title">{{item.name}}</view>
           <view class="{{item.isDel === 1 ? 'green' : 'red'}}">
