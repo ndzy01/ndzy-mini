@@ -8,8 +8,9 @@
             新增待办
           </van-button>
           <van-button wx:if="{{!isLocal || show}}" bindtap="goTagsPage">标签管理</van-button>
+          <!-- <van-button wx:if="{{!isLocal || show}}" bindtap="goSearchPage">搜索</van-button> -->
           <van-button wx:if="{{!isLocal || show}}" bindtap="goLoginPage">登录</van-button>
-          <van-button wx:if="{{!isLocal || show}}" bindtap="goSearchPage">搜索</van-button>
+          <van-button wx:if="{{!isLocal || show}}" bindtap="signOut">登出</van-button>
         </view>
       </van-sticky>
       <view wx:for="{{todos}}" class="todo-item">

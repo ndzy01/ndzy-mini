@@ -5,8 +5,9 @@ Page<
   {
     goEditPage: (e: any) => void;
     goTagsPage: () => void;
-    goLoginPage: () => void;
     goSearchPage: () => void;
+    goLoginPage: () => void;
+    signOut: () => void;
     getAll: () => void;
     finishTodo: (e: any) => void;
     delTodo: (e: any) => void;
@@ -17,6 +18,9 @@ Page<
     show: false,
     todos: [],
     isLocal: false,
+  },
+  onShow() {
+    this.onLoad();
   },
   onPullDownRefresh() {
     this.onLoad();
@@ -42,15 +46,19 @@ Page<
       url: '/pages/tag/index',
     });
   },
+  goSearchPage() {
+    wx.navigateTo({
+      url: '/pages/search/index',
+    });
+  },
   goLoginPage() {
     wx.navigateTo({
       url: '/pages/login/index',
     });
   },
-  goSearchPage() {
-    wx.navigateTo({
-      url: '/pages/search/index',
-    });
+  signOut() {
+    wx.setStorageSync('token', '');
+    this.onLoad();
   },
   getAll() {
     request({

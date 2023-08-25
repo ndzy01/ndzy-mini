@@ -134,15 +134,11 @@ Page<
     };
     if (this.data.id) {
       request({ url: `/todos/${this.data.id}`, method: 'PATCH', data: { ...baseParams } }).then(() => {
-        wx.navigateTo({
-          url: '/pages/index/index',
-        });
+        wx.navigateBack();
       });
     } else {
       request({ url: '/todos', method: 'POST', data: { ...baseParams, operationSource: 'wx' } }).then(() => {
-        wx.navigateTo({
-          url: '/pages/index/index',
-        });
+        wx.navigateBack();
       });
     }
   },
