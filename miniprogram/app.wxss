@@ -1,0 +1,9 @@
+.page-content {
+  padding: 8px 16px;
+}
+
+.page-footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

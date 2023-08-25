@@ -29,11 +29,10 @@ Page<
     showTags: false,
     showCalendar: false,
   },
-  onPullDownRefresh() {
-    this.onLoad();
+  onClickLeft() {
+    wx.navigateBack();
   },
   onLoad(query) {
-    wx.stopPullDownRefresh();
     this.init(query);
   },
   init(query: any) {

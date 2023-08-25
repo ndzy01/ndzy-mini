@@ -1,10 +1,17 @@
 {
-  "pages": ["pages/index/index", "pages/edit/index"],
+  "pages": [
+    "pages/index/index",
+    "pages/edit/index",
+    "pages/login/index",
+    "pages/search/index",
+    "pages/tag/index",
+    "pages/demo/index"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
   },
   "networkTimeout": {
     "request": 20000

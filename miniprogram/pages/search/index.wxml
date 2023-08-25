@@ -1,0 +1,5 @@
+<view>
+  <van-nav-bar title="搜索" left-text="返回" left-arrow bind:click-left="onClickLeft" />
+  <view class="page-content">content</view>
+  <view class="page-footer">footer</view>
+</view>

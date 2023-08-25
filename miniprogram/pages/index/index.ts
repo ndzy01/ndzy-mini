@@ -1,9 +1,12 @@
 import request from '../../http';
 
 Page<
-  { todos: { id: string; isDel: number }[]; isLocal: boolean; showCreate: boolean },
+  { todos: { id: string; isDel: number }[]; isLocal: boolean; show: boolean },
   {
     goEditPage: (e: any) => void;
+    goTagsPage: () => void;
+    goLoginPage: () => void;
+    goSearchPage: () => void;
     getAll: () => void;
     finishTodo: (e: any) => void;
     delTodo: (e: any) => void;
@@ -11,7 +14,7 @@ Page<
   }
 >({
   data: {
-    showCreate: false,
+    show: false,
     todos: [],
     isLocal: false,
   },
@@ -34,25 +37,39 @@ Page<
       });
     }
   },
+  goTagsPage() {
+    wx.navigateTo({
+      url: '/pages/tag/index',
+    });
+  },
+  goLoginPage() {
+    wx.navigateTo({
+      url: '/pages/login/index',
+    });
+  },
+  goSearchPage() {
+    wx.navigateTo({
+      url: '/pages/search/index',
+    });
+  },
   getAll() {
     request({
       url: '/todos',
       method: 'GET',
-      // TODO-n
       data: { operationSource: 'wx' },
     })
       .then((res: any) => {
         this.setData({
           todos: res.data,
           isLocal: false,
-          showCreate: true,
+          show: true,
         });
       })
       .catch(() => {
         this.setData({
           isLocal: true,
           todos: JSON.parse(wx.getStorageSync('local')),
-          showCreate: false,
+          show: false,
         });
       });
   },
