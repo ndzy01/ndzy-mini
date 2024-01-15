@@ -9,10 +9,14 @@
     </van-cell-group>
     <view class="record-list">
       <van-cell-group title="{{ item.id }}" wx:for="{{records}}" class="records-item" wx:key="id">
-        <van-cell title="name" value="{{ item.name }}" />
-        <van-cell title="txt" value="{{ item.txt }}" />
-        <van-cell title="txtInfo" value="{{ item.txtInfo }}" />
-        <van-button wx:if="{{ role==='0' }}" bindtap="bindDel" data-id="{{ item.id }}">删除</van-button>
+        <van-cell value="{{ item.name }}" label="{{ item.txtInfo }}">
+          <view slot="title">
+            <text selectable>{{ item.txt }}</text>
+            <van-tag type="danger" wx:if="{{ role==='0' }}" bindtap="bindDel" data-id="{{ item.id }}">
+              删除
+            </van-tag>
+          </view>
+        </van-cell>
       </van-cell-group>
     </view>
   </view>
