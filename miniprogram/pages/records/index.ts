@@ -1,7 +1,8 @@
 import request from '../../http';
+import { encrypt, decrypt } from '../../utils';
 
 Page<{ records: any[]; name: string; txt: string; txtInfo: string }, { [k: string]: any }>({
-  data: { records: [], name: '11', txt: '', txtInfo: '' },
+  data: { records: [], name: '', txt: '', txtInfo: '' },
   onPullDownRefresh() {
     this.onLoad();
   },
@@ -13,18 +14,30 @@ Page<{ records: any[]; name: string; txt: string; txtInfo: string }, { [k: strin
     wx.navigateBack();
   },
   init() {
-    request({ url: '/records', method: 'GET' }).then((res: any) => {
-      this.setData({ records: res.data });
-    });
-  },
-  bindNameChange(e: any) {
-    this.setData({ name: e.detail });
-  },
-  bindTxtChange(e: any) {
-    this.setData({ txt: e.detail });
-  },
-  bindTxtInfoChange(e: any) {
-    this.setData({ txtInfo: e.detail });
+    request({ url: '/records', method: 'GET' })
+      .then((res: any) => {
+        this.setData({
+          records: res.data.map((item: any) => ({
+            ...item,
+            txt: decrypt(item.txt, item.keyBase, item.ivBase),
+          })),
+        });
+        wx.setStorageSync(
+          'records',
+          JSON.stringify(
+            res.data.map((item: any) => ({
+              ...item,
+              txt: decrypt(item.txt, item.keyBase, item.ivBase),
+            })),
+          ),
+        );
+      })
+      .catch(() => {
+        const records = wx.getStorageSync('records') || '[]';
+        this.setData({
+          records: JSON.parse(records),
+        });
+      });
   },
   bindAdd() {
     if (!this.data.name) {
@@ -43,14 +56,22 @@ Page<{ records: any[]; name: string; txt: string; txtInfo: string }, { [k: strin
       });
       return;
     }
+    const { text, keyBase, ivBase } = encrypt(this.data.txt);
     request({
-      url: '/record',
+      url: '/records',
       method: 'POST',
-      data: { name: this.data.name, txt: this.data.txt, txtInfo: this.data.txt },
+      data: { name: this.data.name, txt: text, txtInfo: this.data.txtInfo, keyBase, ivBase },
     }).then((res: any) => {
-      if (res && res.data && res.data.token) {
+      if (res && res.data) {
         this.setData({ name: '', txt: '', txtInfo: '' });
+        this.init();
       }
+    });
+  },
+  bindDel(e: any) {
+    const { id } = e.target.dataset;
+    request({ url: `/records/${id}`, method: 'DELETE' }).then(() => {
+      this.init();
     });
   },
 });

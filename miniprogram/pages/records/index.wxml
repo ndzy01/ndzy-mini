@@ -1,23 +1,20 @@
-<view>
+<view class="page">
   <van-nav-bar title="records" left-text="返回" left-arrow bind:click-left="onClickLeft" />
   <view class="page-content">
-    <van-field label="name" required clearable value="{{ name }}" placeholder="请输入" border="{{ false }}" bind:change="bindNameChange" />
-    <van-field label="txt" required clearable value="{{ txt }}" placeholder="请输入" border="{{ false }}" bind:change="bindTxtChange" />
-    <van-field label="txtInfo" clearable value="{{ txtInfo }}" placeholder="请输入" border="{{ false }}" bind:change="bindTxtInfoChange" />
-    <van-cell-group>
-      <view wx:for="{{records}}" class="records-item" wx:key="id">
-        <van-tag type="primary">name：{{item.name||"--"}}</van-tag>
-        <van-tag type="success">txt：{{item.txt||"--"}}</van-tag>
-        <van-tag type="danger">txtInfo：{{item.txtInfo||"--"}}</van-tag>
-      </view>
+    <van-cell-group title="新增记录">
+      <van-field model:value="{{ name }}" label="name" error-message="{{ name ? '' : '不能为空' }}" required clearable placeholder="请输入" border="{{ false }}" />
+      <van-field model:value="{{ txt }}" label="txt" error-message="{{ txt ? '' : '不能为空' }}" required clearable placeholder="请输入" border="{{ false }}" />
+      <van-field model:value="{{ txtInfo }}" label="txtInfo" clearable placeholder="请输入" border="{{ false }}" />
+      <van-button type="primary" bindtap="bindAdd">新增</van-button>
     </van-cell-group>
-    <van-cell-group>
-      <van-field label="name" required clearable value="{{ name }}" placeholder="请输入" border="{{ false }}" bind:change="bindNameChange" />
-      <van-field label="txt" required clearable value="{{ txt }}" placeholder="请输入" border="{{ false }}" bind:change="bindTxtChange" />
-      <van-field label="txtInfo" clearable value="{{ txtInfo }}" placeholder="请输入" border="{{ false }}" bind:change="bindTxtInfoChange" />
-    </van-cell-group>
+    <view class="record-list">
+      <van-cell-group title="{{ item.id }}" wx:for="{{records}}" class="records-item" wx:key="id">
+        <van-cell title="name" value="{{ item.name }}" />
+        <van-cell title="txt" value="{{ item.txt }}" />
+        <van-cell title="txtInfo" value="{{ item.txtInfo }}" />
+        <van-button bindtap="bindDel" data-id="{{item.id}}">删除</van-button>
+      </van-cell-group>
+    </view>
   </view>
-  <view class="page-footer">
-    <van-button type="primary" bindtap="bindAdd">新增</van-button>
-  </view>
+  <view class="page-footer"></view>
 </view>

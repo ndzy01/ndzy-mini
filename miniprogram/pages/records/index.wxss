@@ -1,0 +1,9 @@
+.record-list {
+  overflow-y: scroll;
+  height: 400px;
+}
+
+.page {
+  height: 100vh;
+  overflow: hidden;
+}
