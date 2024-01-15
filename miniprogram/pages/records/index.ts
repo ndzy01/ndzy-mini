@@ -1,12 +1,16 @@
 import request from '../../http';
 import { encrypt, decrypt } from '../../utils';
 
-Page<{ records: any[]; name: string; txt: string; txtInfo: string }, { [k: string]: any }>({
-  data: { records: [], name: '', txt: '', txtInfo: '' },
+Page<{ role: string; records: any[]; name: string; txt: string; txtInfo: string }, { [k: string]: any }>({
+  data: { role: '1', records: [], name: '', txt: '', txtInfo: '' },
   onPullDownRefresh() {
     this.onLoad();
   },
   onLoad() {
+    const role = wx.getStorageSync('role') || '1';
+    this.setData({
+      role: role,
+    });
     wx.stopPullDownRefresh();
     this.init();
   },

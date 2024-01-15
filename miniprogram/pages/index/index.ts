@@ -64,6 +64,7 @@ Page<
   },
   signOut() {
     wx.setStorageSync('token', '');
+    wx.setStorageSync('role', '1');
     this.onLoad();
   },
   getAll() {

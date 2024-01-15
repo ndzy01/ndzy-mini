@@ -12,7 +12,7 @@
         <van-cell title="name" value="{{ item.name }}" />
         <van-cell title="txt" value="{{ item.txt }}" />
         <van-cell title="txtInfo" value="{{ item.txtInfo }}" />
-        <van-button bindtap="bindDel" data-id="{{item.id}}">删除</van-button>
+        <van-button wx:if="{{ role==='0' }}" bindtap="bindDel" data-id="{{ item.id }}">删除</van-button>
       </van-cell-group>
     </view>
   </view>

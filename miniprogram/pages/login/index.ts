@@ -44,6 +44,7 @@ Page<
     }).then((res: any) => {
       if (res && res.data && res.data.token) {
         wx.setStorageSync('token', res.data.token);
+        wx.setStorageSync('role', res.data.role);
         wx.navigateBack();
       }
     });
