@@ -1,6 +1,7 @@
 App<IAppOption>({
   globalData: {},
   onLaunch() {
+    wx.setStorageSync('token', '');
     wx.setStorageSync(
       'local',
       JSON.stringify([
