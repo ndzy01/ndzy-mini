@@ -8,7 +8,7 @@
       <van-button type="primary" bindtap="bindAdd">新增</van-button>
     </van-cell-group>
     <view class="record-list">
-      <van-cell-group title="{{ item.id }}" wx:for="{{records}}" class="records-item" wx:key="id">
+      <van-cell-group wx:for="{{records}}" class="records-item" wx:key="id">
         <van-cell value="{{ item.name }}" label="{{ item.txtInfo }}">
           <view slot="title">
             <text selectable>{{ item.txt }}</text>
