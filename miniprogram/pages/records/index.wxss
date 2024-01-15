@@ -7,3 +7,7 @@
   height: 100vh;
   overflow: hidden;
 }
+
+.del {
+  margin-left: 72px;
+}
