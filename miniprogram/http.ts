@@ -5,8 +5,8 @@ const request = (options: {
 }) => {
   wx.showLoading({ title: '加载中' });
   const token = wx.getStorageSync('token') || '';
-  // const baseUrl = 'http://localhost:3000';
-  const baseUrl = 'https://ndzy-server.vercel.app';
+  const baseUrl = 'http://localhost:3000';
+  // const baseUrl = 'https://ndzy-server.vercel.app';
   return new Promise((resolve, reject) => {
     const { data, method } = options;
     if (data && method !== 'GET') {

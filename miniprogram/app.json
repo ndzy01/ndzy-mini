@@ -5,6 +5,7 @@
     "pages/login/index",
     "pages/search/index",
     "pages/tag/index",
+    "pages/records/index",
     "pages/demo/index"
   ],
   "window": {

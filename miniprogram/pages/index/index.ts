@@ -3,6 +3,7 @@ import request from '../../http';
 Page<
   { todos: { id: string; isDel: number }[]; isLocal: boolean; show: boolean },
   {
+    goRecordsPage: () => void;
     goEditPage: (e: any) => void;
     goTagsPage: () => void;
     goSearchPage: () => void;
@@ -28,6 +29,11 @@ Page<
   onLoad() {
     wx.stopPullDownRefresh();
     this.getAll();
+  },
+  goRecordsPage() {
+    wx.navigateTo({
+      url: `/pages/records/index`,
+    });
   },
   goEditPage(e) {
     const { id } = e.target.dataset;

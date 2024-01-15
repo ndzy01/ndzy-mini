@@ -4,6 +4,7 @@
     <scroll-view>
       <van-sticky offset-top="{{ 4 }}">
         <view class="around">
+          <van-button type="primary" data-id="" bindtap="goRecordsPage">records</van-button>
           <van-button wx:if="{{!isLocal || show}}" type="primary" data-id="" bindtap="goEditPage">
             新增待办
           </van-button>
