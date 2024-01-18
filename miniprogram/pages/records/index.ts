@@ -17,7 +17,7 @@ Page<{ role: string; records: any[]; name: string; txt: string; txtInfo: string 
     wx.navigateBack();
   },
   init() {
-    wxCloudRequest({ url: '/records/list', method: 'GET' })
+    wxCloudRequest({ url: '/records/search', method: 'POST' })
       .then((res: any) => {
         this.setData({
           records: res.data,
@@ -61,7 +61,7 @@ Page<{ role: string; records: any[]; name: string; txt: string; txtInfo: string 
   },
   bindDel(e: any) {
     const { id } = e.target.dataset;
-    wxCloudRequest({ url: `/records/${id}`, method: 'DELETE' }).then(() => {
+    wxCloudRequest({ url: `/records/delete`, method: 'POST', data: { id } }).then(() => {
       this.init();
     });
   },
