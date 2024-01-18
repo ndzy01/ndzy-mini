@@ -1,4 +1,4 @@
-import request from '../../http';
+import { wxCloudRequest } from '../../http';
 
 Page<
   {
@@ -37,14 +37,14 @@ Page<
       });
       return;
     }
-    request({
+    wxCloudRequest({
       url: '/users/login',
       method: 'POST',
       data: { mobile: this.data.mobile, password: this.data.password },
     }).then((res: any) => {
-      if (res && res.data && res.data.token) {
-        wx.setStorageSync('token', res.data.token);
-        wx.setStorageSync('role', res.data.role);
+      if (res && res.data) {
+        wx.setStorageSync('token', res.data);
+        // wx.setStorageSync('role', res.data.role);
         wx.navigateBack();
       }
     });

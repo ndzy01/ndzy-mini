@@ -51,7 +51,11 @@ Page<{ role: string; records: any[]; name: string; txt: string; txtInfo: string 
     wxCloudRequest({
       url: '/records',
       method: 'POST',
-      data: { name: this.data.name, txt: this.data.txt, txtInfo: this.data.txtInfo },
+      data: {
+        name: this.data.name,
+        txt: this.data.txt,
+        txtInfo: this.data.txtInfo,
+      },
     }).then((res: any) => {
       if (res && res.data) {
         this.setData({ name: '', txt: '', txtInfo: '' });

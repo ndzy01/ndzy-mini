@@ -73,7 +73,7 @@ export const wxCloudRequest = (options: {
         },
         method: options.method,
         data: {
-          userId: token,
+          ...(token ? { token } : ''),
           ...data,
         },
       })
