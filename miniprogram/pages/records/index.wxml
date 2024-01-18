@@ -12,7 +12,7 @@
         <van-cell value="{{ item.name }}" label="{{ item.txtInfo }}">
           <view slot="title">
             <text selectable>{{ item.txt }}</text>
-            <van-tag class="del" type="danger" wx:if="{{ role==='0' }}" bindtap="bindDel" data-id="{{ item.id }}">
+            <van-tag class="del" type="danger" bindtap="bindDel" data-id="{{ item.id }}">
               删除
             </van-tag>
           </view>

@@ -1,5 +1,4 @@
-import request from '../../http';
-import { encrypt, decrypt } from '../../utils';
+import { wxCloudRequest } from '../../http';
 
 Page<{ role: string; records: any[]; name: string; txt: string; txtInfo: string }, { [k: string]: any }>({
   data: { role: '1', records: [], name: '', txt: '', txtInfo: '' },
@@ -18,23 +17,12 @@ Page<{ role: string; records: any[]; name: string; txt: string; txtInfo: string 
     wx.navigateBack();
   },
   init() {
-    request({ url: '/records', method: 'GET' })
+    wxCloudRequest({ url: '/records/list', method: 'GET' })
       .then((res: any) => {
         this.setData({
-          records: res.data.map((item: any) => ({
-            ...item,
-            txt: decrypt(item.txt, item.keyBase, item.ivBase),
-          })),
+          records: res.data,
         });
-        wx.setStorageSync(
-          'records',
-          JSON.stringify(
-            res.data.map((item: any) => ({
-              ...item,
-              txt: decrypt(item.txt, item.keyBase, item.ivBase),
-            })),
-          ),
-        );
+        wx.setStorageSync('records', JSON.stringify(res.data));
       })
       .catch(() => {
         const records = wx.getStorageSync('records') || '[]';
@@ -60,11 +48,10 @@ Page<{ role: string; records: any[]; name: string; txt: string; txtInfo: string 
       });
       return;
     }
-    const { text, keyBase, ivBase } = encrypt(this.data.txt);
-    request({
+    wxCloudRequest({
       url: '/records',
       method: 'POST',
-      data: { name: this.data.name, txt: text, txtInfo: this.data.txtInfo, keyBase, ivBase },
+      data: { name: this.data.name, txt: this.data.txt, txtInfo: this.data.txtInfo },
     }).then((res: any) => {
       if (res && res.data) {
         this.setData({ name: '', txt: '', txtInfo: '' });
@@ -74,7 +61,7 @@ Page<{ role: string; records: any[]; name: string; txt: string; txtInfo: string 
   },
   bindDel(e: any) {
     const { id } = e.target.dataset;
-    request({ url: `/records/${id}`, method: 'DELETE' }).then(() => {
+    wxCloudRequest({ url: `/records/${id}`, method: 'DELETE' }).then(() => {
       this.init();
     });
   },
