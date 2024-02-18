@@ -5,10 +5,10 @@
       <van-field model:value="{{ name }}" label="name" error-message="{{ name ? '' : '不能为空' }}" required clearable placeholder="请输入" border="{{ false }}" />
       <van-field model:value="{{ txt }}" label="txt" error-message="{{ txt ? '' : '不能为空' }}" required clearable placeholder="请输入" border="{{ false }}" />
       <van-field model:value="{{ txtInfo }}" label="txtInfo" clearable placeholder="请输入" border="{{ false }}" />
-      <van-button type="primary" bindtap="bindAdd">新增</van-button>
+      <van-button type="primary mb-16" block bindtap="bindAdd">新增</van-button>
     </van-cell-group>
     <view class="record-list">
-      <van-cell-group wx:for="{{records}}" class="records-item" wx:key="id">
+      <van-cell-group wx:for="{{ records }}" class="records-item" wx:key="id">
         <van-cell value="{{ item.name }}" label="{{ item.txtInfo }}">
           <view slot="title">
             <text selectable>{{ item.txt }}</text>

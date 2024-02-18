@@ -12,28 +12,30 @@
       </view>
     </van-sticky>
     <scroll-view>
-      <view wx:for="{{todos}}" class="todo-item" wx:key="id">
+      <view wx:for="{{ todos }}" class="todo-item" wx:key="id">
         <view class="around mb-16">
-          <view class="toto-item-title">{{item.name}}</view>
-          <view class="{{item.isFinish ? 'green' : 'red'}}">{{item.isFinish ? '完成' : '处理中'}}</view>
+          <view class="toto-item-title">{{ item.name }}</view>
+          <view class="{{ item.isFinish ? 'green' : 'red' }}">
+            {{ item.isFinish ? '完成' : '处理中' }}
+          </view>
         </view>
         <component-preview value="{{item.detail}}"></component-preview>
         <view class="grid-1">
-          <van-tag type="primary">创建人：{{item.userName||"--"}}</van-tag>
-          <van-tag type="success">标签：{{item.tagName||"--"}}</van-tag>
-          <van-tag type="danger">终止日期：{{item.deadline||"--"}}</van-tag>
+          <van-tag type="primary">创建人：{{ item.userName||"--" }}</van-tag>
+          <van-tag type="success">标签：{{ item.tagName||"--" }}</van-tag>
+          <van-tag type="danger">终止日期：{{ item.deadline||"--" }}</van-tag>
         </view>
         <view class="around mt-16">
-          <van-button wx:if="{{!item.isFinish}}" data-id="{{item.id}}" bindtap="goEditPage">
+          <van-button wx:if="{{ !item.isFinish }}" data-id="{{ item.id }}" bindtap="goEditPage">
             编辑
           </van-button>
-          <van-button wx:if="{{!item.isFinish}}" data-id="{{item.id}}" bindtap="finishTodo">
+          <van-button wx:if="{{ !item.isFinish }}" data-id="{{ item.id }}" bindtap="finishTodo">
             完成
           </van-button>
-          <van-button wx:if="{{item.isFinish}}" data-id="{{item.id}}" bindtap="recoverTodo">
+          <van-button wx:if="{{ item.isFinish }}" data-id="{{ item.id }}" bindtap="recoverTodo">
             恢复
           </van-button>
-          <van-button wx:if="{{item.isFinish}}" data-id="{{item.id}}" bindtap="delTodo">
+          <van-button wx:if="{{ item.isFinish }}" data-id="{{ item.id }}" bindtap="delTodo">
             删除
           </van-button>
         </view>

@@ -8,13 +8,13 @@
           <view class="form-item-label">
             <label>截止时间</label>
           </view>
-          <view class="form-item-value" bindtap="onCalendarDisplay">当前选择: {{deadline}}</view>
+          <view class="form-item-value" bindtap="onCalendarDisplay">当前选择: {{ deadline }}</view>
         </view>
       </van-cell>
       <van-cell>
         <view class="form-item">
           <view class="form-item-value">
-            <component-editor wx:if="{{editType === 'add' || detail}}" value="{{detail}}" bind:onChange="bindDetailChange"></component-editor>
+            <component-editor wx:if="{{ editType === 'add' || detail }}" value="{{ detail }}" bind:onChange="bindDetailChange"></component-editor>
           </view>
         </view>
       </van-cell>
@@ -23,16 +23,18 @@
           <view class="form-item-label">
             <label>标签</label>
           </view>
-          <view class="form-item-value" bindtap="showTagsPopup">当前选择: {{tag.name}}</view>
+          <view class="form-item-value" bindtap="showTagsPopup">当前选择: {{ tag.name }}</view>
         </view>
       </van-cell>
     </van-cell-group>
     <van-popup show="{{ showTags }}" position="bottom" custom-style="height: 50%" bind:close="onTagsClose">
-      <van-picker default-index="{{tagIndex}}" value-key="name" columns="{{ tags }}" bind:change="bindTagChange" />
+      <van-picker default-index="{{ tagIndex }}" value-key="name" columns="{{ tags }}" bind:change="bindTagChange" />
     </van-popup>
     <van-calendar show="{{ showCalendar }}" bind:close="onCalendarClose" bind:confirm="onCalendarConfirm" />
   </view>
   <view class="page-footer">
-    <van-button type="primary" bindtap="bindSave">保存</van-button>
+    <view class="w-100 px-16">
+      <van-button type="primary" block bindtap="bindSave">保存</van-button>
+    </view>
   </view>
 </view>

@@ -7,6 +7,8 @@
     </van-cell-group>
   </view>
   <view class="page-footer">
-    <van-button type="primary" bindtap="bindLogin">登录</van-button>
+    <view class="w-100 px-16">
+      <van-button type="primary" block bindtap="bindLogin">登录</van-button>
+    </view>
   </view>
 </view>
