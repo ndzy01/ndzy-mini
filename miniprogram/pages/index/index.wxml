@@ -19,11 +19,11 @@
             {{ item.isFinish ? '完成' : '处理中' }}
           </view>
         </view>
-        <component-preview value="{{item.detail}}"></component-preview>
+        <component-preview wx:key="{{ item.detail }}" value="{{ item.detail }}"></component-preview>
         <view class="grid-1">
-          <van-tag type="primary">创建人：{{ item.userName||"--" }}</van-tag>
-          <van-tag type="success">标签：{{ item.tagName||"--" }}</van-tag>
-          <van-tag type="danger">终止日期：{{ item.deadline||"--" }}</van-tag>
+          <van-tag type="primary">创建人：{{ item.userName || "--" }}</van-tag>
+          <van-tag type="success">标签：{{ item.tagName || "--" }}</van-tag>
+          <van-tag type="danger">终止日期：{{ item.deadline || "--" }}</van-tag>
         </view>
         <view class="around mt-16">
           <van-button wx:if="{{ !item.isFinish }}" data-id="{{ item.id }}" bindtap="goEditPage">
