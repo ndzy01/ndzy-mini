@@ -5,7 +5,7 @@
       <view class="grid-3">
         <van-button type="primary" bindtap="goEditPage">新增待办</van-button>
         <van-button bindtap="goRecordsPage">records</van-button>
-        <van-button bindtap="goTagsPage">标签管理</van-button>
+        <van-button bindtap="goTagsPage">标签</van-button>
         <!-- <van-button bindtap="goSearchPage">搜索</van-button> -->
         <van-button bindtap="goLoginPage">登录</van-button>
         <van-button bindtap="signOut">登出</van-button>
