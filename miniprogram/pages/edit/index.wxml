@@ -8,9 +8,7 @@
           <view class="form-item-label">
             <label>截止时间</label>
           </view>
-          <view class="form-item-value">
-            <van-cell title="当前选择: " value="{{ deadline }}" bind:click="onCalendarDisplay" />
-          </view>
+          <view class="form-item-value" bindtap="onCalendarDisplay">当前选择: {{deadline}}</view>
         </view>
       </van-cell>
       <van-cell>
@@ -20,7 +18,6 @@
           </view>
         </view>
       </van-cell>
-      <van-field label="链接" clearable value="{{ link }}" placeholder="请输入" border="{{ false }}" bind:change="bindLinkChange" />
       <van-cell>
         <view class="form-item">
           <view class="form-item-label">

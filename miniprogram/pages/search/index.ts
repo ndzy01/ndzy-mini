@@ -1,5 +1,3 @@
-import request from '../../http';
-
 Page<{}, { [k: string]: any }>({
   data: {},
   onPullDownRefresh() {

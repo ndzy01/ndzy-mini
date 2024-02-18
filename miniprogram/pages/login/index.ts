@@ -43,8 +43,7 @@ Page<
       data: { mobile: this.data.mobile, password: this.data.password },
     }).then((res: any) => {
       if (res && res.data) {
-        wx.setStorageSync('token', res.data);
-        // wx.setStorageSync('role', res.data.role);
+        wx.setStorageSync('token', res.data.token);
         wx.navigateBack();
       }
     });

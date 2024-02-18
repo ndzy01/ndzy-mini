@@ -1,4 +1,4 @@
-import request from '../../http';
+import { wxCloudRequest } from '../../http';
 
 Page<{ tags: any[] }, { [k: string]: any }>({
   data: { tags: [] },
@@ -13,7 +13,7 @@ Page<{ tags: any[] }, { [k: string]: any }>({
     wx.navigateBack();
   },
   init() {
-    request({ url: '/tags', method: 'GET' }).then((res: any) => {
+    wxCloudRequest({ url: '/tags', method: 'GET' }).then((res: any) => {
       this.setData({ tags: res.data });
     });
   },

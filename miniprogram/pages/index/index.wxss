@@ -1,3 +1,13 @@
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px; /* 列与列之间的间隔 */
+}
+.grid-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px; /* 列与列之间的间隔 */
+}
 .todo-item {
   background-color: #fff;
   border-radius: 25px;
@@ -20,11 +30,10 @@
   display: flex;
   justify-content: space-around;
 }
-.center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .mb-16 {
   margin-bottom: 16px;
+}
+
+.mt-16 {
+  margin-top: 16px;
 }

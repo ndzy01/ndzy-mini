@@ -1,7 +1,8 @@
-import request from '../../http';
+import { wxCloudRequest } from '../../http';
+import { decrypt } from '../../utils';
 
 Page<
-  { todos: { id: string; isDel: number }[]; isLocal: boolean; show: boolean },
+  { todos: any[] },
   {
     goRecordsPage: () => void;
     goEditPage: (e: any) => void;
@@ -9,16 +10,14 @@ Page<
     goSearchPage: () => void;
     goLoginPage: () => void;
     signOut: () => void;
-    getAll: () => void;
+    getList: () => void;
     finishTodo: (e: any) => void;
     delTodo: (e: any) => void;
     recoverTodo: (e: any) => void;
   }
 >({
   data: {
-    show: false,
     todos: [],
-    isLocal: false,
   },
   onShow() {
     this.onLoad();
@@ -28,7 +27,7 @@ Page<
   },
   onLoad() {
     wx.stopPullDownRefresh();
-    this.getAll();
+    this.getList();
   },
   goRecordsPage() {
     wx.navigateTo({
@@ -64,80 +63,40 @@ Page<
   },
   signOut() {
     wx.setStorageSync('token', '');
-    wx.setStorageSync('role', '1');
-    this.onLoad();
+    wx.navigateTo({
+      url: '/pages/login/index',
+    });
   },
-  getAll() {
-    request({
+  getList() {
+    wxCloudRequest({
       url: '/todos',
       method: 'GET',
       data: { operationSource: 'wx' },
-    })
-      .then((res: any) => {
-        this.setData({
-          todos: res.data,
-          isLocal: false,
-          show: true,
-        });
-      })
-      .catch(() => {
-        this.setData({
-          isLocal: true,
-          todos: JSON.parse(wx.getStorageSync('local')),
-          show: false,
-        });
+    }).then((res: any) => {
+      this.setData({
+        todos: res.data.map((item: any) => ({
+          ...item,
+          detail: decrypt(item.detail, item.keyBase, item.ivBase),
+        })),
       });
+    });
   },
   finishTodo(e) {
     const { id } = e.target.dataset;
-    if (this.data.isLocal) {
-      const todos = this.data.todos.map((item) => {
-        if (item.id === id) {
-          item.isDel = 1;
-        }
-        return item;
-      });
-      this.setData({
-        todos,
-      });
-      wx.setStorageSync('local', JSON.stringify(todos));
-    } else {
-      request({ url: `/todos/${id}`, method: 'PATCH', data: { isDel: true } }).then(() => {
-        this.getAll();
-      });
-    }
+    wxCloudRequest({ url: `/todos/${id}`, method: 'PATCH', data: { isFinish: true } }).then(() => {
+      this.getList();
+    });
   },
   delTodo(e) {
     const { id } = e.target.dataset;
-    if (this.data.isLocal) {
-      const todos = this.data.todos.filter((item) => item.id !== id);
-      this.setData({
-        todos,
-      });
-      wx.setStorageSync('local', JSON.stringify(todos));
-    } else {
-      request({ url: `/todos/${id}`, method: 'DELETE' }).then(() => {
-        this.getAll();
-      });
-    }
+    wxCloudRequest({ url: `/todos/${id}`, method: 'DELETE' }).then(() => {
+      this.getList();
+    });
   },
   recoverTodo(e) {
     const { id } = e.target.dataset;
-    if (this.data.isLocal) {
-      const todos = this.data.todos.map((item) => {
-        if (item.id === id) {
-          item.isDel = 0;
-        }
-        return item;
-      });
-      this.setData({
-        todos,
-      });
-      wx.setStorageSync('local', JSON.stringify(todos));
-    } else {
-      request({ url: `/todos/${id}`, method: 'PATCH', data: { isDel: false } }).then(() => {
-        this.getAll();
-      });
-    }
+    wxCloudRequest({ url: `/todos/${id}`, method: 'PATCH', data: { isFinish: false } }).then(() => {
+      this.getList();
+    });
   },
 });

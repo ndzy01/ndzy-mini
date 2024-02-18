@@ -1,15 +1,11 @@
 import { wxCloudRequest } from '../../http';
 
-Page<{ role: string; records: any[]; name: string; txt: string; txtInfo: string }, { [k: string]: any }>({
-  data: { role: '1', records: [], name: '', txt: '', txtInfo: '' },
+Page<{ records: any[]; name: string; txt: string; txtInfo: string }, { [k: string]: any }>({
+  data: { records: [], name: '', txt: '', txtInfo: '' },
   onPullDownRefresh() {
     this.onLoad();
   },
   onLoad() {
-    const role = wx.getStorageSync('role') || '1';
-    this.setData({
-      role: role,
-    });
     wx.stopPullDownRefresh();
     this.init();
   },
@@ -17,19 +13,11 @@ Page<{ role: string; records: any[]; name: string; txt: string; txtInfo: string 
     wx.navigateBack();
   },
   init() {
-    wxCloudRequest({ url: '/records/search', method: 'POST' })
-      .then((res: any) => {
-        this.setData({
-          records: res.data,
-        });
-        wx.setStorageSync('records', JSON.stringify(res.data));
-      })
-      .catch(() => {
-        const records = wx.getStorageSync('records') || '[]';
-        this.setData({
-          records: JSON.parse(records),
-        });
+    wxCloudRequest({ url: '/records', method: 'GET' }).then((res: any) => {
+      this.setData({
+        records: res.data,
       });
+    });
   },
   bindAdd() {
     if (!this.data.name) {
@@ -65,7 +53,7 @@ Page<{ role: string; records: any[]; name: string; txt: string; txtInfo: string 
   },
   bindDel(e: any) {
     const { id } = e.target.dataset;
-    wxCloudRequest({ url: `/records/delete`, method: 'POST', data: { id } }).then(() => {
+    wxCloudRequest({ url: `/records/${id}`, method: 'DELETE' }).then(() => {
       this.init();
     });
   },

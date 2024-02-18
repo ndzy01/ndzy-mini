@@ -50,3 +50,9 @@ export const encrypt = (text: string) => {
     text: encrypted.ciphertext.toString().toUpperCase(),
   };
 };
+export const objectToQueryString = (obj: any) => {
+  return Object.keys(obj)
+    .map((key) => (obj[key] ? `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}` : ''))
+    .filter((item) => item)
+    .join('&');
+};

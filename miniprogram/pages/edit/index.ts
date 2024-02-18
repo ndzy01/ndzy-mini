@@ -1,10 +1,10 @@
-import request from '../../http';
+import { wxCloudRequest } from '../../http';
+import { decrypt, encrypt } from '../../utils';
 
 Page<
   {
     id: string;
     detail: string;
-    link: string;
     name: string;
     deadline: string;
     tags: any[];
@@ -19,7 +19,6 @@ Page<
   data: {
     id: '',
     detail: '',
-    link: '',
     name: '',
     deadline: '',
     tags: [],
@@ -37,18 +36,17 @@ Page<
   },
   init(query: any) {
     if (query.id) {
-      request({ url: `/todos/${query.id}`, method: 'GET' }).then((res: any) => {
-        if (res.data && res.data.length > 0) {
-          const todo = res.data[0];
+      wxCloudRequest({ url: `/todos/${query.id}`, method: 'GET' }).then((res: any) => {
+        if (res.data) {
+          const todo = res.data;
           this.setData({
             id: query.id,
-            detail: todo.detail,
-            link: todo.link,
+            detail: decrypt(todo.detail, todo.keyBase, todo.ivBase),
             name: todo.name,
             deadline: todo.deadline,
             editType: 'edit',
           });
-          request({ url: '/tags', method: 'GET' }).then((tagRes: any) => {
+          wxCloudRequest({ url: '/tags', method: 'GET' }).then((tagRes: any) => {
             this.setData({
               tags: tagRes.data,
               tagIndex: tagRes.data.findIndex((item: any) => item.id === todo.tagId),
@@ -58,7 +56,7 @@ Page<
         }
       });
     } else {
-      request({ url: '/tags', method: 'GET' }).then((tagRes: any) => {
+      wxCloudRequest({ url: '/tags', method: 'GET' }).then((tagRes: any) => {
         if (tagRes.data.length > 0) {
           this.setData({
             tag: tagRes.data[0],
@@ -76,9 +74,6 @@ Page<
   },
   bindNameChange(e: any) {
     this.setData({ name: e.detail });
-  },
-  bindLinkChange(e: any) {
-    this.setData({ link: e.detail });
   },
   bindDeadlineChange(e: any) {
     const { value } = e.detail;
@@ -125,19 +120,21 @@ Page<
       });
       return;
     }
+    const { text, keyBase, ivBase } = encrypt(this.data.detail);
     const baseParams: any = {
-      link: this.data.link,
       tagId: this.data.tag.id,
       name: this.data.name,
       deadline: this.data.deadline,
-      detail: this.data.detail,
+      detail: text,
+      keyBase,
+      ivBase,
     };
     if (this.data.id) {
-      request({ url: `/todos/${this.data.id}`, method: 'PATCH', data: { ...baseParams } }).then(() => {
+      wxCloudRequest({ url: `/todos/${this.data.id}`, method: 'PATCH', data: { ...baseParams } }).then(() => {
         wx.navigateBack();
       });
     } else {
-      request({ url: '/todos', method: 'POST', data: { ...baseParams, operationSource: 'wx' } }).then(() => {
+      wxCloudRequest({ url: '/todos', method: 'POST', data: { ...baseParams, operationSource: 'wx' } }).then(() => {
         wx.navigateBack();
       });
     }

@@ -1,41 +1,39 @@
 <view>
   <van-nav-bar title="待办" />
   <view class="page-content">
+    <van-sticky offset-top="{{ 4 }}">
+      <view class="grid-3">
+        <van-button type="primary" bindtap="goEditPage">新增待办</van-button>
+        <van-button bindtap="goRecordsPage">records</van-button>
+        <van-button bindtap="goTagsPage">标签管理</van-button>
+        <!-- <van-button bindtap="goSearchPage">搜索</van-button> -->
+        <van-button bindtap="goLoginPage">登录</van-button>
+        <van-button bindtap="signOut">登出</van-button>
+      </view>
+    </van-sticky>
     <scroll-view>
-      <van-sticky offset-top="{{ 4 }}">
-        <view class="around">
-          <van-button type="primary" data-id="" bindtap="goRecordsPage">records</van-button>
-          <van-button wx:if="{{!isLocal || show}}" type="primary" data-id="" bindtap="goEditPage">
-            新增待办
-          </van-button>
-          <van-button wx:if="{{!isLocal || show}}" bindtap="goTagsPage">标签管理</van-button>
-          <!-- <van-button wx:if="{{!isLocal || show}}" bindtap="goSearchPage">搜索</van-button> -->
-          <van-button wx:if="{{!isLocal || show}}" bindtap="goLoginPage">登录</van-button>
-          <van-button wx:if="{{!isLocal || show}}" bindtap="signOut">登出</van-button>
-        </view>
-      </van-sticky>
       <view wx:for="{{todos}}" class="todo-item" wx:key="id">
         <view class="around mb-16">
           <view class="toto-item-title">{{item.name}}</view>
-          <view class="{{item.isDel === 1 ? 'green' : 'red'}}">
-            {{item.isDel === 1 ? '完成' : '处理中'}}
-          </view>
+          <view class="{{item.isFinish ? 'green' : 'red'}}">{{item.isFinish ? '完成' : '处理中'}}</view>
         </view>
         <component-preview value="{{item.detail}}"></component-preview>
-        <van-tag type="primary">创建人：{{item.userName||"--"}}</van-tag>
-        <van-tag type="success">标签：{{item.tagName||"--"}}</van-tag>
-        <van-tag type="danger">终止日期：{{item.deadline||"--"}}</van-tag>
-        <view class="around">
-          <van-button wx:if="{{item.isDel === 0 && !isLocal }}" data-id="{{item.id}}" bindtap="goEditPage">
+        <view class="grid-1">
+          <van-tag type="primary">创建人：{{item.userName||"--"}}</van-tag>
+          <van-tag type="success">标签：{{item.tagName||"--"}}</van-tag>
+          <van-tag type="danger">终止日期：{{item.deadline||"--"}}</van-tag>
+        </view>
+        <view class="around mt-16">
+          <van-button wx:if="{{!item.isFinish}}" data-id="{{item.id}}" bindtap="goEditPage">
             编辑
           </van-button>
-          <van-button wx:if="{{item.isDel === 0}}" data-id="{{item.id}}" bindtap="finishTodo">
+          <van-button wx:if="{{!item.isFinish}}" data-id="{{item.id}}" bindtap="finishTodo">
             完成
           </van-button>
-          <van-button wx:if="{{item.isDel === 1}}" data-id="{{item.id}}" bindtap="recoverTodo">
+          <van-button wx:if="{{item.isFinish}}" data-id="{{item.id}}" bindtap="recoverTodo">
             恢复
           </van-button>
-          <van-button wx:if="{{item.isDel === 1}}" data-id="{{item.id}}" bindtap="delTodo">
+          <van-button wx:if="{{item.isFinish}}" data-id="{{item.id}}" bindtap="delTodo">
             删除
           </van-button>
         </view>
