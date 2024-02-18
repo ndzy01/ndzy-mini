@@ -49,8 +49,8 @@ Page<
           wxCloudRequest({ url: '/tags', method: 'GET' }).then((tagRes: any) => {
             this.setData({
               tags: tagRes.data,
-              tagIndex: tagRes.data.findIndex((item: any) => item.id === todo.tagId),
-              tag: tagRes.data.find((item: any) => item.id === todo.tagId),
+              tagIndex: tagRes.data.findIndex((item: any) => item.id === todo.tag.id),
+              tag: tagRes.data.find((item: any) => item.id === todo.tag.id),
             });
           });
         }
