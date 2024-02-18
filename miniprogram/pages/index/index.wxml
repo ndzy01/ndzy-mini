@@ -3,7 +3,7 @@
   <view class="page-content">
     <van-sticky offset-top="{{ 4 }}">
       <view class="grid-3">
-        <van-button type="primary" bindtap="goEditPage">新增待办</van-button>
+        <van-button type="primary" bindtap="goEditPage">新增</van-button>
         <van-button bindtap="goRecordsPage">records</van-button>
         <van-button bindtap="goTagsPage">标签</van-button>
         <!-- <van-button bindtap="goSearchPage">搜索</van-button> -->
