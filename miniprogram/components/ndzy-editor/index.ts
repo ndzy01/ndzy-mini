@@ -1,4 +1,4 @@
-Component({
+Component<{ editorCtx: any; formats: any }, any, any>({
   properties: {
     placeholder: {
       type: String,
@@ -9,10 +9,9 @@ Component({
       value: '',
     },
   },
-  editorCtx: undefined,
   data: {
     formats: {},
-    // 用户手机键盘得高度，大于0表示打开了键盘
+    editorCtx: undefined,
   },
   methods: {
     onEditorReady() {
@@ -20,28 +19,25 @@ Component({
       this.createSelectorQuery()
         .in(this)
         .select('#editor')
-        .context((res) => {
-          this.editorCtx = res.context;
-          this.setContents(this.properties.value);
+        .context((res: any) => {
+          this.setData({ editorCtx: res.context });
+          res.context.setContents({
+            html: this.properties.value,
+          });
         })
         .exec();
     },
     format(e: any) {
       const { name, value } = e.target.dataset;
-      this.editorCtx.format(name, value);
+      this.data.editorCtx.format(name, value);
     },
     onStatusChange(e: any) {
       this.setData({
         formats: e.detail,
       });
     },
-    setContents(html: string) {
-      this.editorCtx.setContents({
-        html,
-      });
-    },
     getEditorContent() {
-      this.editorCtx.getContents({
+      this.data.editorCtx.getContents({
         success: (res: any) => {
           this.triggerEvent('onChange', { html: res.html });
         },

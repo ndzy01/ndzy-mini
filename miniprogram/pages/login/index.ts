@@ -44,7 +44,9 @@ Page<
     }).then((res: any) => {
       if (res && res.data) {
         wx.setStorageSync('token', res.data.token);
-        wx.navigateBack();
+        wx.navigateTo({
+          url: '/pages/index/index',
+        });
       }
     });
   },
