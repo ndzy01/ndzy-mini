@@ -8,4 +8,4 @@
   <i class="iconfont icon-youxupailie {{ formats.list === 'ordered' ? 'ql-active' : '' }}" data-name="list" data-value="ordered"></i>
   <i class="iconfont icon-wuxupailie {{ formats.list === 'bullet' ? 'ql-active' : '' }}" data-name="list" data-value="bullet"></i>
 </view>
-<editor style="height:auto; min-height:240px;" id="editor" class="ql-container" bindinput="getEditorContent" bindready="onEditorReady" bindstatuschange="onStatusChange" placeholder="{{ placeholder }}"></editor>
+<editor style="height:240px; max-height:400px; overflow:scroll;" id="editor" class="ql-container" bindinput="getEditorContent" bindready="onEditorReady" bindstatuschange="onStatusChange" placeholder="{{ placeholder }}"></editor>
