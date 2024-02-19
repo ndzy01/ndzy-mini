@@ -73,11 +73,12 @@ Page<
       method: 'GET',
       data: { operationSource: 'wx' },
     }).then((res: any) => {
+      const list = res.data.map((item: any) => ({
+        ...item,
+        detail: decrypt(item.detail, item.keyBase, item.ivBase),
+      }));
       this.setData({
-        todos: res.data.map((item: any) => ({
-          ...item,
-          detail: decrypt(item.detail, item.keyBase, item.ivBase),
-        })),
+        todos: [...list],
       });
     });
   },

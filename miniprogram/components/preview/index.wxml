@@ -1,2 +1,0 @@
-<editor read-only id="preview" class="ql-container" bindready="onEditorReady" value="{{ innerValue }}"></editor>
-<slot></slot>

@@ -19,7 +19,7 @@
             {{ item.isFinish ? '完成' : '处理中' }}
           </view>
         </view>
-        <component-preview wx:key="{{ item.detail }}" value="{{ item.detail }}"></component-preview>
+        <rich-text nodes="{{ item.detail }}"></rich-text>
         <view class="grid-1">
           <van-tag type="primary">创建人：{{ item.userName || "--" }}</van-tag>
           <van-tag type="success">标签：{{ item.tagName || "--" }}</van-tag>
