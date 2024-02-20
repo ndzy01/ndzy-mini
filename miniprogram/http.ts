@@ -32,6 +32,12 @@ export const wxCloudRequest = (options: {
         data,
       })
       .then((res) => {
+        // 鉴权失败
+        if (res.data.statusCode === 401) {
+          wx.navigateTo({
+            url: `/pages/login/index`,
+          });
+        }
         if (res.data.status === 11) {
           wx.hideLoading();
           resolve(res.data);
